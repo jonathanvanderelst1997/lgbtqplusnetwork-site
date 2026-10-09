@@ -1,0 +1,47 @@
+# Render Blueprint: statische site van LGBTQ+ Network (Think Different vzw).
+# Gratis static site; geen build nodig, de bestanden staan kant-en-klaar in ./site.
+services:
+  - type: web
+    name: lgbtqplusnetwork
+    runtime: static
+    buildCommand: echo "geen build nodig"
+    staticPublishPath: ./site
+    domains:
+      - www.lgbtqplusnetwork.be
+      - lgbtqplusnetwork.be
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
+    routes:
+      # oude Wix-adressen blijven werken
+      - type: redirect
+        source: /home
+        destination: /
+      - type: redirect
+        source: /contact-us
+        destination: /contact.html
+      - type: redirect
+        source: /donate
+        destination: /steun.html
+      - type: redirect
+        source: /community
+        destination: /community.html
+      - type: redirect
+        source: /privacy-policy
+        destination: /privacy.html
+      - type: redirect
+        source: /forum
+        destination: /community.html
+      - type: redirect
+        source: /forum/*
+        destination: /community.html
