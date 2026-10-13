@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>LGBTQ+ Network | Think Different vzw</title>
+<meta name="description" content="LGBTQ+ Network van Think Different vzw: vertrouwelijke hulp, informatie over je rechten en een community voor LGBTQ+ mensen in Antwerpen, Vlaanderen en Brussel.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://thinkdifferentvzw.wixsite.com">
+<link rel="preconnect" href="https://static.parastorage.com" crossorigin>
+<link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
+<style>
+  html, body { margin: 0; height: 100%; background: #fff; }
+  iframe { display: block; border: 0; width: 100%; height: 100%; }
+  noscript a { display: block; padding: 2rem 1rem; font: 1.1rem system-ui, sans-serif; }
+</style>
+<script>
+  // De site zelf staat op Wix; deze pagina toont hem onder lgbtqplusnetwork.be.
+  // Wix ontwerpt de gsm-versie op 320 px breed: zonder deze schaal is alles op een gsm piepklein.
+  (function () {
+    var gsm = /Android.+Mobile|iPhone|iPod|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
+    if (gsm) document.querySelector('meta[name=viewport]').setAttribute('content', 'width=320, user-scalable=yes');
+  })();
+</script>
+</head>
+<body>
+<iframe id="site" title="LGBTQ+ Network" allow="clipboard-write; fullscreen"></iframe>
+<noscript><a href="https://thinkdifferentvzw.wixsite.com/lgbtqplusnetwork">LGBTQ+ Network: ga naar de website</a></noscript>
+<script>
+  // Een diepe link zoals lgbtqplusnetwork.be/contact-us opent dezelfde pagina op Wix.
+  (function () {
+    var basis = 'https://thinkdifferentvzw.wixsite.com/lgbtqplusnetwork';
+    var pad = location.pathname.replace(/\/index\.html$/, '').replace(/\/+$/, '');
+    document.getElementById('site').src = basis + (/^\/[a-z0-9-]+$/i.test(pad) ? pad : '');
+  })();
+</script>
+</body>
+</html>
