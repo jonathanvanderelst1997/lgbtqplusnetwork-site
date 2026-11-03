@@ -1,0 +1,34 @@
+# Deze naam is de binding in project-brain-gateway: config/repositories.json
+# (managed_ci_workflow) en config/operator-repositories.json (required_workflows)
+# noemen "lgbtqplusnetwork-site Validate" op dit pad, en de operator zoekt runs
+# op precies die naam. Hernoem je hem, dan wordt die controle nooit groen.
+name: lgbtqplusnetwork-site Validate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    # Publieke repo: altijd op een GitHub-runner (gratis voor publieke repo's),
+    # nooit op de Mac. Vaste Ubuntu, geen -latest (zie project-brain-gateway #1226).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Site nakijken (pagina's, interne links, sitemap)
+        run: node scripts/check-site.mjs site
